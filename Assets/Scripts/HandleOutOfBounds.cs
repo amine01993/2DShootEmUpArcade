@@ -2,26 +2,27 @@ using UnityEngine;
 
 public class HandleOutOfBounds : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private GameObject scrollingBackground;
+    private float initialYPosition;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        scrollingBackground = GameObject.FindGameObjectWithTag("Background");
+        initialYPosition = scrollingBackground.transform.position.y;
+        //initialYPosition = 18f;
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        //Debug.Log($"Outer bounds OnTriggerEnter2D {collision.gameObject.tag}");
 		if(collision.gameObject.CompareTag("Player Bullet")
 		|| collision.gameObject.CompareTag("Enemy Bullet")
 		|| collision.gameObject.CompareTag("Enemy Bullet 2")
 		|| collision.gameObject.CompareTag("Enemy Bullet 3")) {
             Destroy(collision.gameObject);
         }
+
+        if(collision.gameObject.CompareTag("Background FinishLine")) {
+            scrollingBackground.transform.position = new Vector3(0f, initialYPosition, 0f);
+		}
 	}
 }

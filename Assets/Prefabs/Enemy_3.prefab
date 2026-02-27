@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2960402581040015946, guid: 6e56674d63b6312408272452a4f60d85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -208,11 +208,14 @@ MonoBehaviour:
   initialBulletPosition1: {x: -0.065, y: 0.35, z: 0}
   initialBulletPosition2: {x: 0.065, y: 0.35, z: 0}
   fireRate: 1.3
-  vSpeed: 10
-  hSpeed: 7
+  speed: 5
+  rotationSpeed: 5
   maxHealthPoints: 120
   healthPoints: 0
   crashDamage: 60
   crashed: 0
   collisionCooldown: 2
+  startShooting: 0
+  lifeTime: 8
   projectile: {fileID: 3011517115041219943, guid: a6ca1401c95042d4aa8a464e2d57dd97, type: 3}
+  path: {fileID: 4808951754240433042, guid: cf7da1d718adbe34189d86b3cce27d9b, type: 3}

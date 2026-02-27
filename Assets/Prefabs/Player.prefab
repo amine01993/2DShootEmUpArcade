@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6066880551947969411}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.778, y: -4.05, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3266420488847890900, guid: 6f788da87c828a6408431057262858fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -115,8 +115,6 @@ MonoBehaviour:
   healthPoints: 100
   shieldPoints: 0
   crashDamage: 50
-  crashed: 0
-  collisionCooldown: 3
   projectile: {fileID: 2133697720961088028, guid: 8261e1ac66b7f1f4b9e463976de5325c, type: 3}
 --- !u!50 &470203979554621785
 Rigidbody2D:
@@ -142,7 +140,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!58 &7494983210271200354

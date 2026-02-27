@@ -29,6 +29,21 @@ trying to Lerp a rotation…
 https://discussions.unity.com/t/trying-to-lerp-a-rotation/102606/2
 (This helped animate enemy rotation)
 
+OnTriggerStay2D stops working randomly.
+https://discussions.unity.com/t/ontriggerstay2d-stops-working-randomly/139466
+(OnTriggerStay2D stops being called after a while because it is on mode lazy per default)
+
+official doc for the splines package (I used it to animate gameobjects alongside a predefined path)
+https://docs.unity3d.com/Packages/com.unity.splines@2.8/api/index.html
+
+Add and remove components by scripting
+https://discussions.unity.com/t/add-and-remove-components-by-scripting/400390/3
+(Destroy can be used on gameobjects as well as their components)
+
+Detect if object is visible on camera
+https://discussions.unity.com/t/detect-if-object-is-visible-on-camera/851643
+(Help me check if a gameobject is visible on camera)
+
 ===================================================
 ======= LICENSES
 ===================================================
@@ -43,3 +58,7 @@ https://opengameart.org/content/space-shooter-art
 
 Tilt Neon Designed by Andy Clymer, licensed under the SIL Open Font License 1.1 [Font].
 https://fonts.google.com/specimen/Tilt+Neon
+
+CC BY 4.0 Deed
+Author: Unnamed
+https://opengameart.org/content/17-planet-sprites

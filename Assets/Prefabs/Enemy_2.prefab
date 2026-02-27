@@ -143,8 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShip2
   initialBulletPosition: {x: 0, y: 0, z: 0}
   fireRate: 0.8
-  vSpeed: 10
-  hSpeed: 7
+  speed: 7
   maxHealthPoints: 40
   healthPoints: 0
   crashDamage: 30
@@ -152,3 +151,5 @@ MonoBehaviour:
   collisionCooldown: 2
   bulletsPerPulse: 8
   projectile: {fileID: 2393433372964846925, guid: fe61bccda66f42b4b9bb9128aa54fd56, type: 3}
+  leftPath: {fileID: 1993743953936130102, guid: d66f51f7401b1df4fba3eeddb2e616d3, type: 3}
+  rightPath: {fileID: 5173807036789298685, guid: d244505d234cacf4b886995261db25ad, type: 3}

@@ -15,6 +15,12 @@ TagManager:
   - Enemy 2
   - Enemy Bullet 3
   - Enemy 3
+  - Background FinishLine
+  - Background
+  - Spawn End
+  - Spawn Start
+  - E1 Entrance
+  - E1 Exit
   layers:
   - Default
   - TransparentFX
