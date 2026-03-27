@@ -2,45 +2,44 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CanTakeDamage))]
+[RequireComponent(typeof(CanCrash))]
+[RequireComponent(typeof(SingleShots))]
+[RequireComponent(typeof(DoubleShots))]
+[RequireComponent(typeof(QuadrupleShots))]
+[RequireComponent(typeof(ShotsWithMissiles))]
 public class PlayerShip : MonoBehaviour
 {
-	private float fireRateTimeTracker = 0f;
 	private bool topBoundCollision = false;
 	private bool rightBoundCollision = false;
 	private bool bottomBoundCollision = false;
 	private bool leftBoundCollision = false;
+	private SingleShots singleShots;
+	private DoubleShots doubleShots;
+	private QuadrupleShots quadrupleShots;
+	private ShotsWithMissiles shotsWithMissiles;
 
-	public Vector3 initialPosition = new Vector3(0f, -4.5f, 0f);
+	public Vector3 initialPosition = new(0f, -4.5f, 0f);
 	public float hSpeed = 10f;
 	public float vSpeed = 7f;
-	public float fireRate = 5f; // bullets per second
-	public int maxHealthPoints = 100;
-	public int maxShield = 100;
-	public int healthPoints = 100;
-	public int shieldPoints = 0;
-	public int crashDamage = 50;
 
-	public GameObject projectile;
+	public Attacks attack = Attacks.SingleShots;
 
 	InputAction moveAction;
-	InputAction attackAction;
-
 
 	void Start()
 	{
 		moveAction = InputSystem.actions.FindAction("Move");
-		attackAction = InputSystem.actions.FindAction("Attack");
 		transform.position = initialPosition;
-		healthPoints = maxHealthPoints;
+
+		singleShots = GetComponent<SingleShots>();
+		doubleShots = GetComponent<DoubleShots>();
+		quadrupleShots = GetComponent<QuadrupleShots>();
+		shotsWithMissiles = GetComponent<ShotsWithMissiles>();
 	}
 
 	void Update()
 	{
-		if (healthPoints <= 0)
-		{
-			Destroy(gameObject);
-		}
-
 		Vector2 moveValue = moveAction.ReadValue<Vector2>();
 		Debug.DrawLine(transform.position, transform.position + new Vector3(moveValue.x, moveValue.y, 0f));
 
@@ -51,17 +50,7 @@ public class PlayerShip : MonoBehaviour
 		if (moveY > 0 && topBoundCollision) moveY = 0f;
 		if (moveY < 0 && bottomBoundCollision) moveY = 0f;
 
-		transform.position += new Vector3(moveX, moveY, 0f) * vSpeed * Time.deltaTime;
-
-		if (attackAction.phase == InputActionPhase.Performed && fireRateTimeTracker == 0f)
-		{
-			Instantiate(projectile, transform.position, projectile.transform.rotation);
-			UpdateFireRateTimeTracker();
-		}
-		else if (fireRateTimeTracker > 0f)
-		{
-			UpdateFireRateTimeTracker();
-		}
+		transform.position += new Vector3(moveX * hSpeed, moveY * vSpeed, 0f) * Time.deltaTime;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -81,48 +70,6 @@ public class PlayerShip : MonoBehaviour
 		else if (collision.gameObject.CompareTag("Boundary Left"))
 		{
 			leftBoundCollision = true;
-		}
-		else if (collision.gameObject.CompareTag("Enemy Bullet")
-		|| collision.gameObject.CompareTag("Enemy Bullet 2")
-		|| collision.gameObject.CompareTag("Enemy Bullet 3"))
-		{
-			var enemyBullet = collision.gameObject.GetComponent<EnemyBullet>();
-			healthPoints -= enemyBullet.damage;
-			Destroy(collision.gameObject);
-		}
-	}
-
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-		if (collision.gameObject.CompareTag("Enemy"))
-		{
-			var enemy = collision.gameObject.GetComponent<EnemyShip>();
-			if (!enemy.crashed)
-			{
-				healthPoints -= enemy.crashDamage;
-				enemy.healthPoints -= crashDamage;
-				enemy.crashed = true;
-			}
-		}
-		else if (collision.gameObject.CompareTag("Enemy 2"))
-		{
-			var enemy = collision.gameObject.GetComponent<EnemyShip2>();
-			if (!enemy.crashed)
-			{
-				healthPoints -= enemy.crashDamage;
-				enemy.healthPoints -= crashDamage;
-				enemy.crashed = true;
-			}
-		}
-		else if (collision.gameObject.CompareTag("Enemy 3"))
-		{
-			var enemy = collision.gameObject.GetComponent<EnemyShip3>();
-			if (!enemy.crashed)
-			{
-				healthPoints -= enemy.crashDamage;
-				enemy.healthPoints -= crashDamage;
-				enemy.crashed = true;
-			}
 		}
 	}
 
@@ -146,12 +93,35 @@ public class PlayerShip : MonoBehaviour
 		}
 	}
 
-	private void UpdateFireRateTimeTracker()
+	public void PowerUp()
 	{
-		fireRateTimeTracker += Time.deltaTime;
-		if (fireRateTimeTracker >= 1 / fireRate)
+		switch (attack)
 		{
-			fireRateTimeTracker = 0f;
+			case Attacks.SingleShots:
+				singleShots.enabled = false;
+				doubleShots.enabled = true;
+				attack = Attacks.DoubleShots;
+				break;
+			case Attacks.DoubleShots:
+				doubleShots.enabled = false;
+				quadrupleShots.enabled = true;
+				attack = Attacks.QuadrupleShots;
+				break;
+			case Attacks.QuadrupleShots:
+				quadrupleShots.enabled = false;
+				shotsWithMissiles.enabled = true;
+				attack = Attacks.ShotsWithMissiles;
+				break;
+			case Attacks.ShotsWithMissiles:
+				break;
 		}
 	}
+}
+
+public enum Attacks
+{
+	SingleShots,
+	DoubleShots,
+	QuadrupleShots,
+	ShotsWithMissiles
 }

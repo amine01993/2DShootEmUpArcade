@@ -14,15 +14,9 @@ public class HandleOutOfBounds : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.gameObject.CompareTag("Player Bullet")
-		|| collision.gameObject.CompareTag("Enemy Bullet")
-		|| collision.gameObject.CompareTag("Enemy Bullet 2")
-		|| collision.gameObject.CompareTag("Enemy Bullet 3")) {
-            Destroy(collision.gameObject);
-        }
-
-        if(collision.gameObject.CompareTag("Background FinishLine")) {
+        if (collision.gameObject.CompareTag("Background FinishLine"))
+        {
             scrollingBackground.transform.position = new Vector3(0f, initialYPosition, 0f);
-		}
-	}
+        }
+    }
 }
