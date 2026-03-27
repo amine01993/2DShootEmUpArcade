@@ -44,6 +44,51 @@ Detect if object is visible on camera
 https://discussions.unity.com/t/detect-if-object-is-visible-on-camera/851643
 (Help me check if a gameobject is visible on camera)
 
+## Milstone 4
+
+Rotate a Vector3 direction
+https://discussions.unity.com/t/rotate-a-vector3-direction/14722
+(Provided the line of code for rotating a vector direction by angle along an axis)
+
+OnTriggerExit() is not called when a object inside is destroyed
+https://www.reddit.com/r/Unity3D/comments/y2n26d/ontriggerexit_is_not_called_when_a_object_inside/
+I placed a rectangle on the screen with similar dimensions to keep track of objects on screen, objects destroyed on screen were still being marked as tracked, so after I checked that, I used OnDestroy to untrack these objects.
+
+UNT0024 Give priority to scalar calculations over vector calculations
+https://github.com/microsoft/Microsoft.Unity.Analyzers/blob/main/doc/UNT0024.md
+Showed me that in a multiplication of more than 2 factors, starting with scalars from the left is faster
+
+Events & Delegates in Unity
+https://gamedevbeginner.com/events-and-delegates-in-unity/
+I used this article as guide to help me communicate between separate monobehaviour game objects
+
+[Solved] Where is force applied on Rigidbodies?
+https://discussions.unity.com/t/solved-where-is-force-applied-on-rigidbodies/731510
+Give reference to the right documentation that led me to the correct method for applying force to my collecible game object
+
+bouncing an object of a wall.
+https://discussions.unity.com/t/bouncing-an-object-of-a-wall/907446/10
+I wished to make my collectible bounce of the edges of the screen, this thread was of great help.
+
+Attribute (role-playing games)
+https://en.wikipedia.org/wiki/Attribute_(role-playing_games)
+I leaned that player statistic, (primary) characteristic or ability are called attributes as a general term
+
+changing TextMeshPro Text (from UI) via script
+https://discussions.unity.com/t/changing-textmeshpro-text-from-ui-via-script/659074/5
+I used textmeshpro component for a few canvas elements. This discussion shows the correct class name, which allowed to use the component on a script
+
+https://discussions.unity.com/t/best-way-to-initiate-waves-of-enemies-2d-shooter/816637/3
+This discussion inspired me to mix up wave with enemy formation (constant) with other waves of randomly instantianted enemies
+
+Is there a way to create a table in the inspector?
+https://discussions.unity.com/t/is-there-a-way-to-create-a-table-in-the-inspector/732861
+This led me to learn about UI Toolkit and create a custom UI in the inspector
+
+Cannot finish the game in Unity using Application.Quit() [duplicate]
+https://stackoverflow.com/questions/70437401/cannot-finish-the-game-in-unity-using-application-quit
+Provided script for quitting the game in build and editor
+
 ===================================================
 ======= LICENSES
 ===================================================

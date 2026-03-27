@@ -21,8 +21,8 @@ public class ShotsWithMissiles : MonoBehaviour
 	void Start()
 	{
 		attackAction = InputSystem.actions.FindAction("Attack");
-		fireRateTimeTracker = new TimeTracker(fireRate);
-		missileFireRateTimeTracker = new TimeTracker(missileFireRate);
+		fireRateTimeTracker = new TimeTracker(1f / fireRate);
+		missileFireRateTimeTracker = new TimeTracker(1f / missileFireRate);
 	}
 
 	void Update()

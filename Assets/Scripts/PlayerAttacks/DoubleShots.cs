@@ -14,7 +14,7 @@ public class DoubleShots : MonoBehaviour
 	void Start()
 	{
 		attackAction = InputSystem.actions.FindAction("Attack");
-		fireRateTimeTracker = new TimeTracker(fireRate);
+		fireRateTimeTracker = new TimeTracker(1f / fireRate);
 	}
 
 	void Update()
