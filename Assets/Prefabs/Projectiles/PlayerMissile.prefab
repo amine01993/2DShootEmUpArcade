@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7105313924494473830}
   - component: {fileID: 7275360604449488152}
   - component: {fileID: 1146831665331733520}
+  - component: {fileID: 1276065829548398630}
   m_Layer: 15
   m_Name: PlayerMissile
   m_TagString: Untagged
@@ -151,7 +152,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -189,3 +190,15 @@ MonoBehaviour:
   speed: 2.75
   rotationSpeed: 2.47
   damage: 70
+--- !u!114 &1276065829548398630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038436609348643342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23766f3fbe007364fb9a3e0970522eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrackedOnScreen

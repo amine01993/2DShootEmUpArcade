@@ -2161,7 +2161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteorSpawnManager
   spawnIntervale: 5
-  spawnProbability: 0.3
+  spawnProbability: 1
   typeProbabilities:
   - 0.6
   - 0.4
@@ -9326,6 +9326,10 @@ PrefabInstance:
       propertyPath: canTakeDamage
       value: 
       objectReference: {fileID: 11265795}
+    - target: {fileID: 1337663307072554946, guid: 450880fd4ca9dbd4caaadc1809e8570f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1702667709532315626, guid: 450880fd4ca9dbd4caaadc1809e8570f, type: 3}
       propertyPath: healthBarUi
       value: 
@@ -9378,6 +9382,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5378364769178760880, guid: 450880fd4ca9dbd4caaadc1809e8570f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6066880551947969411, guid: 450880fd4ca9dbd4caaadc1809e8570f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -9421,6 +9429,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 350104712476725918, guid: 43f56d8e3787d53418e7de60028abb7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1000494991738196426, guid: 43f56d8e3787d53418e7de60028abb7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

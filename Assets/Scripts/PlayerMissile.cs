@@ -22,21 +22,21 @@ public class PlayerMissile : MonoBehaviour
 
 	void Update()
 	{
-		if (!OnScreenObjectsTracker.IsTracked(gameObject)) return;
+		if (OnScreenObjectsTracker.IsTracked(gameObject)) {
+			if (target == null || !OnScreenObjectsTracker.IsTracked(target))
+			{
+				target = OnScreenObjectsTracker.GetNearestTarget(transform.position);
+			}
+			else
+			{
+				var lookAtOrientation = GetLookAtTargetAngle(target);
 
-		if (target == null || !OnScreenObjectsTracker.IsTracked(target))
-		{
-			target = OnScreenObjectsTracker.GetNearestTarget(transform.position);
-		}
-		else
-		{
-			var lookAtOrientation = GetLookAtTargetAngle(target);
-
-			transform.rotation = Quaternion.Lerp(
-				transform.rotation,
-				Quaternion.AngleAxis(lookAtOrientation, Vector3.forward),
-				Time.deltaTime * rotationSpeed
-			);
+				transform.rotation = Quaternion.Lerp(
+					transform.rotation,
+					Quaternion.AngleAxis(lookAtOrientation, Vector3.forward),
+					Time.deltaTime * rotationSpeed
+				);
+			}
 		}
 
 		transform.Translate(speed * Time.deltaTime * Vector3.up);
