@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2898270372175627589}
   - component: {fileID: 2577725757162763435}
   - component: {fileID: 8563361944655773171}
+  - component: {fileID: -9134284494691164737}
   m_Layer: 17
   m_Name: Shield
   m_TagString: Untagged
@@ -173,6 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CanTakeDamage
   maxHealthPoints: 100
   healthPoints: 100
+  healthBarUi: {fileID: 0}
 --- !u!114 &2577725757162763435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +200,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d36155a56213714eb5705c768b76adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanCrash
+  OnCrashSfx: {fileID: 0}
+  OnCrashVfx: {fileID: 0}
   crashDamage: 70
   collisionCooldown: 2
   canCrash: 1
+--- !u!95 &-9134284494691164737
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090531262095802419}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d19c382924cbc2a4c93348445b45ef79, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

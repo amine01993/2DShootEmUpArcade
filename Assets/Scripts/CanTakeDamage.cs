@@ -1,22 +1,32 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CanTakeDamage : MonoBehaviour
 {
+	private TimeTracker hpAnimTimeTracker;
+	private float oldPercentage;
 	private PlayerShip player;
 	private Shield shield;
+	private Animator animator;
 	public static event Func<int> OnPlayerDeath;
 
 	public int maxHealthPoints = 100;
 	public int healthPoints;
 	public GameObject healthBarUi;
+	public float healthBarTransitionTime = .2f;
 
 	void Start()
 	{
 		player = GetComponent<PlayerShip>();
 		shield = GetComponent<Shield>();
+		animator = GetComponent<Animator>();
+
+		hpAnimTimeTracker = new TimeTracker(healthBarTransitionTime, false);
+		if (healthBarUi != null)
+		{
+			oldPercentage = healthBarUi.transform.localScale.x;
+		}
 	}
 
 	void Update()
@@ -41,6 +51,11 @@ public class CanTakeDamage : MonoBehaviour
 				}
 			}
 		}
+
+		if (healthBarUi != null)
+		{
+			UpdateHealthBar();
+		}
 	}
 
 	public void TakeDamage(int damage)
@@ -49,9 +64,16 @@ public class CanTakeDamage : MonoBehaviour
 		{
 			healthPoints -= damage;
 			healthPoints = Math.Max(0, healthPoints);
+
 			if (healthBarUi != null)
 			{
-				UpdateHealthBar();
+				hpAnimTimeTracker.Reset();
+				oldPercentage = healthBarUi.transform.localScale.x;
+			}
+
+			if (animator != null)
+			{
+				animator.Play("HitFlash");
 			}
 		}
 	}
@@ -60,15 +82,31 @@ public class CanTakeDamage : MonoBehaviour
 	{
 		healthPoints += hp;
 		healthPoints = Math.Min(maxHealthPoints, healthPoints);
+
 		if (healthBarUi != null)
 		{
-			UpdateHealthBar();
+			hpAnimTimeTracker.Reset();
+			oldPercentage = healthBarUi.transform.localScale.x;
+		}
+
+		if (animator != null)
+		{
+			if (player != null)
+				animator.Play("OnHealth");
 		}
 	}
 
 	private void UpdateHealthBar()
 	{
-		float percentage = (float)healthPoints / maxHealthPoints;
-		healthBarUi.transform.localScale = new Vector3(percentage, 1f, 1f);
+		if (!hpAnimTimeTracker.IsExpired())
+		{
+			float percentage = (float)healthPoints / maxHealthPoints;
+			healthBarUi.transform.localScale = Vector3.Lerp(
+				new Vector3(oldPercentage, 1f, 1f),
+				new Vector3(percentage, 1f, 1f),
+				hpAnimTimeTracker.GetRatio()
+			);
+			hpAnimTimeTracker.Update();
+		}
 	}
 }

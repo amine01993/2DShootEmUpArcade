@@ -1,33 +1,32 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CanShoot))]
 public class DoubleShots : MonoBehaviour
 {
-	private TimeTracker fireRateTimeTracker;
-	public float fireRate = 5f; // bullets per second
+	private CanShoot canShoot;
+
 	public GameObject projectile;
 	public Vector3 bulletPosition1 = new(.18f, 0, 0);
 	public Vector3 bulletPosition2 = new(-.18f, 0, 0);
 
-	InputAction attackAction;
-
-	void Start()
+	private void Awake()
 	{
-		attackAction = InputSystem.actions.FindAction("Attack");
-		fireRateTimeTracker = new TimeTracker(1f / fireRate);
+		canShoot = GetComponent<CanShoot>();
 	}
 
-	void Update()
+	private void OnEnable()
 	{
-		if (attackAction.phase == InputActionPhase.Performed && fireRateTimeTracker.IsZero())
-		{
-			Instantiate(projectile, transform.TransformPoint(bulletPosition1), projectile.transform.rotation);
-			Instantiate(projectile, transform.TransformPoint(bulletPosition2), projectile.transform.rotation);
-			fireRateTimeTracker.Update();
-		}
-		else if (!fireRateTimeTracker.IsZero())
-		{
-			fireRateTimeTracker.Update();
-		}
+		canShoot.OnShooting += Shoot;
+	}
+
+	private void OnDisable()
+	{
+		canShoot.OnShooting -= Shoot;
+	}
+
+	void Shoot()
+	{
+		Instantiate(projectile, transform.TransformPoint(bulletPosition1), projectile.transform.rotation);
+		Instantiate(projectile, transform.TransformPoint(bulletPosition2), projectile.transform.rotation);
 	}
 }

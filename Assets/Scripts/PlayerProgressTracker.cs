@@ -15,6 +15,11 @@ public class PlayerProgressTracker : MonoBehaviour
 	public GameObject scoreUI;
 	public GameObject lifeCountUI;
 
+	private void Awake()
+	{
+		Time.timeScale = 1;
+	}
+
 	private void Start()
 	{
 		ship = player.GetComponent<PlayerShip>();

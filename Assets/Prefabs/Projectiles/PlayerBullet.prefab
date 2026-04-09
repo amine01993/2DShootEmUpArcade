@@ -181,3 +181,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBullet
   speed: 9
   damage: 20
+  OnHitSfx: {fileID: 1724178548180401653, guid: 0b65724fd43ed114c8471d6aefcacf20, type: 3}
+  OnHitVfx: {fileID: 7493201540411045939, guid: 99bfc9df43428774c818700975644cc3, type: 3}

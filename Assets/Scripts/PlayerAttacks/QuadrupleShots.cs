@@ -1,37 +1,36 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CanShoot))]
 public class QuadrupleShots : MonoBehaviour
 {
-	private TimeTracker fireRateTimeTracker;
-	public float fireRate = 5f; // bullets per second
+	private CanShoot canShoot;
+
 	public GameObject projectile;
 	public Vector3 bulletPosition1 = new(.28f, 0, 0);
 	public Vector3 bulletPosition3 = new(.1f, 0, 0);
 	public Vector3 bulletPosition2 = new(-.1f, 0, 0);
 	public Vector3 bulletPosition4 = new(-.28f, 0, 0);
 
-	InputAction attackAction;
-
-	void Start()
-    {
-		attackAction = InputSystem.actions.FindAction("Attack");
-		fireRateTimeTracker = new TimeTracker(1f / fireRate);
+	private void Awake()
+	{
+		canShoot = GetComponent<CanShoot>();
 	}
 
-	void Update()
+	private void OnEnable()
+	{
+		canShoot.OnShooting += Shoot;
+	}
+
+	private void OnDisable()
+	{
+		canShoot.OnShooting -= Shoot;
+	}
+
+	void Shoot()
     {
-		if (attackAction.phase == InputActionPhase.Performed && fireRateTimeTracker.IsZero())
-		{
-			Instantiate(projectile, transform.TransformPoint(bulletPosition1), projectile.transform.rotation);
-			Instantiate(projectile, transform.TransformPoint(bulletPosition2), projectile.transform.rotation);
-			Instantiate(projectile, transform.TransformPoint(bulletPosition3), projectile.transform.rotation);
-			Instantiate(projectile, transform.TransformPoint(bulletPosition4), projectile.transform.rotation);
-			fireRateTimeTracker.Update();
-		}
-		else if (!fireRateTimeTracker.IsZero())
-		{
-			fireRateTimeTracker.Update();
-		}
+		Instantiate(projectile, transform.TransformPoint(bulletPosition1), projectile.transform.rotation);
+		Instantiate(projectile, transform.TransformPoint(bulletPosition2), projectile.transform.rotation);
+		Instantiate(projectile, transform.TransformPoint(bulletPosition3), projectile.transform.rotation);
+		Instantiate(projectile, transform.TransformPoint(bulletPosition4), projectile.transform.rotation);
 	}
 }

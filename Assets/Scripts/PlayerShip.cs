@@ -4,25 +4,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CanTakeDamage))]
 [RequireComponent(typeof(CanCrash))]
+[RequireComponent(typeof(CanShoot))]
 [RequireComponent(typeof(SingleShots))]
 [RequireComponent(typeof(DoubleShots))]
 [RequireComponent(typeof(QuadrupleShots))]
 [RequireComponent(typeof(ShotsWithMissiles))]
+[RequireComponent(typeof(Animator))]
 public class PlayerShip : MonoBehaviour
 {
-	private bool topBoundCollision = false;
-	private bool rightBoundCollision = false;
-	private bool bottomBoundCollision = false;
-	private bool leftBoundCollision = false;
+	private BoundCollision boundCollision;
 	private SingleShots singleShots;
 	private DoubleShots doubleShots;
 	private QuadrupleShots quadrupleShots;
 	private ShotsWithMissiles shotsWithMissiles;
+	private Animator animator;
 
 	public Vector3 initialPosition = new(0f, -4.5f, 0f);
 	public float hSpeed = 10f;
 	public float vSpeed = 7f;
-
 	public Attacks attack = Attacks.SingleShots;
 
 	InputAction moveAction;
@@ -36,6 +35,9 @@ public class PlayerShip : MonoBehaviour
 		doubleShots = GetComponent<DoubleShots>();
 		quadrupleShots = GetComponent<QuadrupleShots>();
 		shotsWithMissiles = GetComponent<ShotsWithMissiles>();
+		animator = GetComponent<Animator>();
+
+		boundCollision = new BoundCollision();
 	}
 
 	void Update()
@@ -45,10 +47,12 @@ public class PlayerShip : MonoBehaviour
 
 		float moveX = moveValue.x;
 		float moveY = moveValue.y;
-		if (moveX > 0 && rightBoundCollision) moveX = 0f;
-		if (moveX < 0 && leftBoundCollision) moveX = 0f;
-		if (moveY > 0 && topBoundCollision) moveY = 0f;
-		if (moveY < 0 && bottomBoundCollision) moveY = 0f;
+		if (moveX > 0 && boundCollision.Has(BoundCollision.Bounds.Right)) moveX = 0f;
+		if (moveX < 0 && boundCollision.Has(BoundCollision.Bounds.Left)) moveX = 0f;
+		if (moveY > 0 && boundCollision.Has(BoundCollision.Bounds.Top)) moveY = 0f;
+		if (moveY < 0 && boundCollision.Has(BoundCollision.Bounds.Bottom)) moveY = 0f;
+
+		HandleMoveAnimation(moveX, moveY);
 
 		transform.position += new Vector3(moveX * hSpeed, moveY * vSpeed, 0f) * Time.deltaTime;
 	}
@@ -57,19 +61,19 @@ public class PlayerShip : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Boundary Top"))
 		{
-			topBoundCollision = true;
+			boundCollision.Add(BoundCollision.Bounds.Top);
 		}
 		else if (collision.gameObject.CompareTag("Boundary Right"))
 		{
-			rightBoundCollision = true;
+			boundCollision.Add(BoundCollision.Bounds.Right);
 		}
 		else if (collision.gameObject.CompareTag("Boundary Bottom"))
 		{
-			bottomBoundCollision = true;
+			boundCollision.Add(BoundCollision.Bounds.Bottom);
 		}
 		else if (collision.gameObject.CompareTag("Boundary Left"))
 		{
-			leftBoundCollision = true;
+			boundCollision.Add(BoundCollision.Bounds.Left);
 		}
 	}
 
@@ -77,19 +81,19 @@ public class PlayerShip : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Boundary Top"))
 		{
-			topBoundCollision = false;
+			boundCollision.Remove(BoundCollision.Bounds.Top);
 		}
 		else if (collision.gameObject.CompareTag("Boundary Right"))
 		{
-			rightBoundCollision = false;
+			boundCollision.Remove(BoundCollision.Bounds.Right);
 		}
 		else if (collision.gameObject.CompareTag("Boundary Bottom"))
 		{
-			bottomBoundCollision = false;
+			boundCollision.Remove(BoundCollision.Bounds.Bottom);
 		}
 		else if (collision.gameObject.CompareTag("Boundary Left"))
 		{
-			leftBoundCollision = false;
+			boundCollision.Remove(BoundCollision.Bounds.Left);
 		}
 	}
 
@@ -115,6 +119,12 @@ public class PlayerShip : MonoBehaviour
 			case Attacks.ShotsWithMissiles:
 				break;
 		}
+		animator.Play("PowerUp");
+	}
+
+	private void HandleMoveAnimation(float moveX, float moveY) {
+		animator.SetInteger("dx", moveX == 0f ? 0 : (moveX > 0 ? 1 : -1));
+		animator.SetInteger("dy", moveY == 0f ? 0 : (moveY > 0 ? 1 : -1));
 	}
 }
 

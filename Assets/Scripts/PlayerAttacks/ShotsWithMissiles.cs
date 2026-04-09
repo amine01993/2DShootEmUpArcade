@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CanShoot))]
 public class ShotsWithMissiles : MonoBehaviour
 {
-	private TimeTracker fireRateTimeTracker;
-	private TimeTracker missileFireRateTimeTracker;
-	public float fireRate = 5f; // bullets per second
+	private CanShoot canShoot;
+	private CanShoot canLaunch;
+
 	public float missileFireRate = 2f; // bullets per second
 	public GameObject projectile;
 	public GameObject missile;
@@ -16,39 +17,38 @@ public class ShotsWithMissiles : MonoBehaviour
 	public Vector3 missilePosition1 = new(-.24f, 0, 0);
 	public Vector3 missilePosition2 = new(.24f, 0, 0);
 
-	InputAction attackAction;
-
-	void Start()
+	private void Awake()
 	{
-		attackAction = InputSystem.actions.FindAction("Attack");
-		fireRateTimeTracker = new TimeTracker(1f / fireRate);
-		missileFireRateTimeTracker = new TimeTracker(1f / missileFireRate);
+		var canShoots = GetComponents<CanShoot>();
+		canShoot = canShoots[0];
+		canLaunch = canShoots[1];
 	}
 
-	void Update()
+	private void OnEnable()
 	{
-		if (attackAction.phase == InputActionPhase.Performed && fireRateTimeTracker.IsZero())
-		{
-			Instantiate(projectile, transform.TransformPoint(bulletPosition1), projectile.transform.rotation);
-			Instantiate(projectile, transform.TransformPoint(bulletPosition2), projectile.transform.rotation);
-			Instantiate(projectile, transform.TransformPoint(bulletPosition3), projectile.transform.rotation);
-			Instantiate(projectile, transform.TransformPoint(bulletPosition4), projectile.transform.rotation);
-			fireRateTimeTracker.Update();
-		}
-		else if (!fireRateTimeTracker.IsZero())
-		{
-			fireRateTimeTracker.Update();
-		}
+		canShoot.OnShooting += Shoot;
+		canLaunch.enabled = true;
+		canLaunch.OnShooting += Launch;
+	}
 
-		if (attackAction.phase == InputActionPhase.Performed && missileFireRateTimeTracker.IsZero())
-		{
-			Instantiate(missile, transform.TransformPoint(missilePosition1), projectile.transform.rotation * Quaternion.Euler(0f, 0f, -90f));
-			Instantiate(missile, transform.TransformPoint(missilePosition2), projectile.transform.rotation * Quaternion.Euler(0f, 0f, 90f));
-			missileFireRateTimeTracker.Update();
-		}
-		else if (!missileFireRateTimeTracker.IsZero())
-		{
-			missileFireRateTimeTracker.Update();
-		}
+	private void OnDisable()
+	{
+		canShoot.OnShooting -= Shoot;
+		canLaunch.OnShooting -= Launch;
+		canLaunch.enabled = false;
+	}
+
+	void Shoot()
+	{
+		Instantiate(projectile, transform.TransformPoint(bulletPosition1), projectile.transform.rotation);
+		Instantiate(projectile, transform.TransformPoint(bulletPosition2), projectile.transform.rotation);
+		Instantiate(projectile, transform.TransformPoint(bulletPosition3), projectile.transform.rotation);
+		Instantiate(projectile, transform.TransformPoint(bulletPosition4), projectile.transform.rotation);
+	}
+
+	void Launch()
+	{
+		Instantiate(missile, transform.TransformPoint(missilePosition1), projectile.transform.rotation * Quaternion.Euler(0f, 0f, -90f));
+		Instantiate(missile, transform.TransformPoint(missilePosition2), projectile.transform.rotation * Quaternion.Euler(0f, 0f, 90f));
 	}
 }

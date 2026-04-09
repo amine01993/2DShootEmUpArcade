@@ -1,30 +1,29 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CanShoot))]
 public class SingleShots : MonoBehaviour
 {
-	private TimeTracker fireRateTimeTracker;
-	public float fireRate = 5f; // bullets per second
+	private CanShoot canShoot;
+
 	public GameObject projectile;
 
-	InputAction attackAction;
-
-	void Start()
-    {
-		attackAction = InputSystem.actions.FindAction("Attack");
-		fireRateTimeTracker = new TimeTracker(1f / fireRate);
+	private void Awake()
+	{
+		canShoot = GetComponent<CanShoot>();
 	}
 
-	void Update()
+	private void OnEnable()
+	{
+		canShoot.OnShooting += Shoot;
+	}
+
+	private void OnDisable()
+	{
+		canShoot.OnShooting -= Shoot;
+	}
+
+	void Shoot()
     {
-		if (attackAction.phase == InputActionPhase.Performed && fireRateTimeTracker.IsZero())
-		{
-			Instantiate(projectile, transform.position, projectile.transform.rotation);
-			fireRateTimeTracker.Update();
-		}
-		else if (!fireRateTimeTracker.IsZero())
-		{
-			fireRateTimeTracker.Update();
-		}
+		Instantiate(projectile, transform.position, projectile.transform.rotation);
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine.Splines;
 public class MeteorSpawnManager : MonoBehaviour
 {
 
-	private float meteorSpawnTimeTracker = 0f;
+	private TimeTracker meteorSpawnTimeTracker;
 	private Spline meteorSplineLine;
 	private SpawnMeteor handler;
 
@@ -20,6 +20,8 @@ public class MeteorSpawnManager : MonoBehaviour
 		var meteorSplineContainer = meteorSpawnLine.GetComponent<SplineContainer>();
 		meteorSplineLine = meteorSplineContainer.Spline;
 		handler = new(spawnProbability, typeProbabilities);
+
+		meteorSpawnTimeTracker = new(spawnIntervale);
 	}
 
 	void Update()
@@ -29,7 +31,7 @@ public class MeteorSpawnManager : MonoBehaviour
 
 	private void SpawnAMeteor()
 	{
-		if (meteorSpawnTimeTracker == 0f)
+		if (meteorSpawnTimeTracker.IsZero())
 		{
 			var meteorSpawn = handler.GetSpawn(meteorSplineLine, meteorSpawnLine);
 			if (meteorSpawn.HasValue)
@@ -41,20 +43,11 @@ public class MeteorSpawnManager : MonoBehaviour
 				meteor.Init(meteorSpawn.Value.direction);
 			}
 
-			UpdateMeteorSpawnTime();
+			meteorSpawnTimeTracker.Update();
 		}
-		else if (meteorSpawnTimeTracker > 0f)
+		else
 		{
-			UpdateMeteorSpawnTime();
-		}
-	}
-
-	private void UpdateMeteorSpawnTime()
-	{
-		meteorSpawnTimeTracker += Time.deltaTime;
-		if (meteorSpawnTimeTracker >= spawnIntervale)
-		{
-			meteorSpawnTimeTracker = 0f;
+			meteorSpawnTimeTracker.Update();
 		}
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(TrackedOnScreen))]
@@ -10,6 +11,8 @@ public class PlayerMissile : MonoBehaviour
 	public float speed = 2.75f;
 	public float rotationSpeed = 2.47f;
 	public int damage = 70;
+	public GameObject OnExplodeSfx;
+	public GameObject OnExplodeVfx;
 
 	private GameObject target = null;
 
@@ -48,18 +51,31 @@ public class PlayerMissile : MonoBehaviour
 		{
 			var enemyCtd = collision.gameObject.GetComponent<CanTakeDamage>();
 			enemyCtd.TakeDamage(damage);
+			Instantiate(OnExplodeSfx);
+			CreateVfx(collision);
 			Destroy(gameObject);
 		}
 		if (collision.gameObject.layer == obstacleLayer)
 		{
 			var meteorCtd = collision.gameObject.GetComponent<CanTakeDamage>();
 			meteorCtd.TakeDamage(damage);
+			Instantiate(OnExplodeSfx);
+			CreateVfx(collision);
 			Destroy(gameObject);
 		}
 		else if (collision.gameObject.layer == outerBoundLayer)
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	void CreateVfx(Collider2D collision)
+	{
+		Vector2 collisionPt = collision.ClosestPoint(new Vector2(transform.position.x, transform.position.y));
+		//var direction = collisionPt - (Vector2)transform.position;
+		//var orientation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+		Debug.Log("CreateVfx");
+		Instantiate(OnExplodeVfx, collisionPt, transform.rotation);
 	}
 
 	private float GetLookAtTargetAngle(GameObject target)

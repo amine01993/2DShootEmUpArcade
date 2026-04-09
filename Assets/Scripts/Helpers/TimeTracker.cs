@@ -36,5 +36,10 @@ public class TimeTracker
 	{
 		tracker = 0f;
 	}
+
+	public float GetRatio()
+	{
+		return Mathf.Min(tracker / cooldown, 1f);
+	}
 }
 

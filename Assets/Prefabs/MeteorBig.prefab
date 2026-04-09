@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 6901002259531405858}
   - component: {fileID: 18962237640108894}
   - component: {fileID: 2668186736570248301}
+  - component: {fileID: 1144170783986139183}
+  - component: {fileID: 6799343918860720153}
   m_Layer: 11
   m_Name: MeteorBig
   m_TagString: Untagged
@@ -222,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CanTakeDamage
   maxHealthPoints: 250
   healthPoints: 250
+  healthBarUi: {fileID: 0}
 --- !u!114 &18962237640108894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +250,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d36155a56213714eb5705c768b76adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanCrash
+  OnCrashSfx: {fileID: 0}
+  OnCrashVfx: {fileID: 0}
   crashDamage: 80
   collisionCooldown: 1
   canCrash: 1
+--- !u!114 &1144170783986139183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531680063273333520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23766f3fbe007364fb9a3e0970522eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrackedOnScreen
+--- !u!95 &6799343918860720153
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531680063273333520}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d19c382924cbc2a4c93348445b45ef79, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

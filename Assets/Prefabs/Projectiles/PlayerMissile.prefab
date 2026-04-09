@@ -190,6 +190,8 @@ MonoBehaviour:
   speed: 2.75
   rotationSpeed: 2.47
   damage: 70
+  OnExplodeSfx: {fileID: 1724178548180401653, guid: e9b1076790af3484ab0138ab0420fe7d, type: 3}
+  OnExplodeVfx: {fileID: 771435840038630767, guid: 4a9d04e9978d418429e41d3d6df63db4, type: 3}
 --- !u!114 &1276065829548398630
 MonoBehaviour:
   m_ObjectHideFlags: 0

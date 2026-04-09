@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CanTakeDamage))]
@@ -10,6 +11,8 @@ public class CanCrash : MonoBehaviour
 	private CanTakeDamage playerCtd;
 	private GameObject playerShieldGo;
 	private Shield shield;
+	public GameObject OnCrashSfx;
+	public GameObject OnCrashVfx;
 
 	public int crashDamage = 20;
 	public float collisionCooldown = 2f;
@@ -57,6 +60,8 @@ public class CanCrash : MonoBehaviour
 					shield.TakeDamage(enemyCc.crashDamage);
 					enemyCtd.TakeDamage(crashDamage);
 					enemyCc.canCrash = false;
+					Instantiate(OnCrashSfx);
+					CreateVfx(collision);
 				}
 			}
 			else if (collision.gameObject.layer == obstacleLayer)
@@ -70,6 +75,8 @@ public class CanCrash : MonoBehaviour
 					shield.TakeDamage(meteorCc.crashDamage);
 					meteorCtd.TakeDamage(shieldCc.crashDamage);
 					meteorCc.canCrash = false;
+					Instantiate(OnCrashSfx);
+					CreateVfx(collision);
 				}
 			}
 		}
@@ -84,6 +91,8 @@ public class CanCrash : MonoBehaviour
 					playerCtd.TakeDamage(enemyCc.crashDamage);
 					enemyCtd.TakeDamage(crashDamage);
 					enemyCc.canCrash = false;
+					Instantiate(OnCrashSfx);
+					CreateVfx(collision);
 				}
 			}
 			else if (collision.gameObject.layer == obstacleLayer)
@@ -95,8 +104,18 @@ public class CanCrash : MonoBehaviour
 					playerCtd.TakeDamage(meteorCc.crashDamage);
 					meteorCtd.TakeDamage(crashDamage);
 					meteorCc.canCrash = false;
+					Instantiate(OnCrashSfx);
+					CreateVfx(collision);
 				}
 			}
 		}
+	}
+
+	void CreateVfx(Collider2D collision) {
+		Vector2 collisionPt = collision.ClosestPoint(new Vector2(transform.position.x, transform.position.y));
+		var direction = collisionPt - (Vector2)transform.position;
+		var orientation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+		Instantiate(OnCrashVfx, collisionPt, Quaternion.Euler(orientation + 180f, -90f, -90f));
 	}
 }

@@ -688,3 +688,4 @@ MonoBehaviour:
   maxBounceCount: 3
   bounceCount: 0
   randomDirection: {x: 0, y: 0}
+  OnCollectSfx: {fileID: 1724178548180401653, guid: d157e129e04206e4c9429a5ed7ea4d08, type: 3}
