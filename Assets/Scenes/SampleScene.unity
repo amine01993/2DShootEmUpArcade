@@ -3516,7 +3516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ef4880f9d9da741a11545af8c09cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleSpawnManager
-  spawnProbabilty: 0.3
+  spawnProbabilty: 0.5
   typeProbabilies:
   - 0.4
   - 0.3
@@ -8622,6 +8622,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1011779802062507262}
     - target: {fileID: 3598233185346542364, guid: 43f56d8e3787d53418e7de60028abb7f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210420437622217051, guid: 43f56d8e3787d53418e7de60028abb7f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
