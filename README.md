@@ -89,6 +89,36 @@ Cannot finish the game in Unity using Application.Quit() [duplicate]
 https://stackoverflow.com/questions/70437401/cannot-finish-the-game-in-unity-using-application-quit
 Provided script for quitting the game in build and editor
 
+## Milestone 5
+
+jsfxr - 8 bit sound maker and online sfx generator
+https://sfxr.me/
+Used it to generate sound effects
+
+destroy object and play sound?
+https://discussions.unity.com/t/destroy-object-and-play-sound/168894/4
+Helpt me come up with the idea of creating prefabs for each of the sound effects
+
+Sound is played with a delay.
+https://discussions.unity.com/t/sound-is-played-with-a-delay/708928/15
+I was using my bluetooth earphones and I was experiencing a delay for each soundfx, at first, I thought it was a unity problem, but this article help me realize that the delay was caused by the bluetooth
+
+Fix Unity Particle System Delay | Not Starting Immediately (2D Sprite Particles)
+https://www.youtube.com/watch?v=uBIq0vfYfqU
+another delay issue with the particle system that I found how to fix in this video
+
+Scripting With The Animator Component in Unity
+https://www.youtube.com/watch?v=I_ilRHeHvIs
+This is a good video that introduces the animator component in unity
+
+Make On Hit Flash Effect In Unity 6
+https://www.youtube.com/watch?v=oJEq4sPxHhU
+Shows how to make hit flash in unity
+
+Animate the scaling of a gameObject
+https://discussions.unity.com/t/animate-the-scaling-of-a-gameobject/70235/5
+Used this article to animate the health bars
+
 ===================================================
 ======= LICENSES
 ===================================================
@@ -107,3 +137,11 @@ https://fonts.google.com/specimen/Tilt+Neon
 CC BY 4.0 Deed
 Author: Unnamed
 https://opengameart.org/content/17-planet-sprites
+
+CC-BY 3.0
+Author: Oblidivm
+https://opengameart.org/content/space-shooter-music
+
+CC0
+Author: diamonddmgirl
+https://opengameart.org/content/32x32-explosion

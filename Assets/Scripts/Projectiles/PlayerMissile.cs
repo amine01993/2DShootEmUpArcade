@@ -72,9 +72,6 @@ public class PlayerMissile : MonoBehaviour
 	void CreateVfx(Collider2D collision)
 	{
 		Vector2 collisionPt = collision.ClosestPoint(new Vector2(transform.position.x, transform.position.y));
-		//var direction = collisionPt - (Vector2)transform.position;
-		//var orientation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-		Debug.Log("CreateVfx");
 		Instantiate(OnExplodeVfx, collisionPt, transform.rotation);
 	}
 

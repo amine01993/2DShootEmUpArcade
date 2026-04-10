@@ -16,15 +16,16 @@ public class CanTakeDamage : MonoBehaviour
 	public GameObject healthBarUi;
 	public float healthBarTransitionTime = .2f;
 
-	void Start()
+	private void OnEnable()
 	{
 		player = GetComponent<PlayerShip>();
 		shield = GetComponent<Shield>();
 		animator = GetComponent<Animator>();
 
-		hpAnimTimeTracker = new TimeTracker(healthBarTransitionTime, false);
 		if (healthBarUi != null)
 		{
+			healthBarUi.SetActive(true);
+			hpAnimTimeTracker = new TimeTracker(healthBarTransitionTime, false);
 			oldPercentage = healthBarUi.transform.localScale.x;
 		}
 	}
@@ -33,11 +34,7 @@ public class CanTakeDamage : MonoBehaviour
 	{
 		if (healthPoints <= 0)
 		{
-			if (player == null)
-			{
-				Destroy(gameObject);
-			}
-			else
+			if (player != null)
 			{
 				var remainingLifes = OnPlayerDeath.Invoke();
 				if (remainingLifes > -1)
@@ -49,6 +46,15 @@ public class CanTakeDamage : MonoBehaviour
 				{
 					Destroy(gameObject);
 				}
+			}
+			else if (shield != null)
+			{
+				gameObject.SetActive(false);
+				healthBarUi.SetActive(false);
+			}
+			else
+			{
+				Destroy(gameObject);
 			}
 		}
 

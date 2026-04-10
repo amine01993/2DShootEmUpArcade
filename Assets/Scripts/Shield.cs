@@ -9,12 +9,12 @@ public class Shield : MonoBehaviour
 
 	public void AddShield(int sp)
 	{
-		canTakeDamage.AddHealthPoints(sp);
-
 		if (!gameObject.activeSelf)
 		{
 			gameObject.SetActive(true);
 		}
+
+		canTakeDamage.AddHealthPoints(sp);
 	}
 
 	public int TakeDamage(int damage)
@@ -24,11 +24,6 @@ public class Shield : MonoBehaviour
 		if (damage >= 0)
 		{
 			canTakeDamage.TakeDamage(damage);
-
-			if (canTakeDamage.healthPoints <= 0)
-			{
-				gameObject.SetActive(false);
-			}
 		}
 
 		return remainingDamage;
