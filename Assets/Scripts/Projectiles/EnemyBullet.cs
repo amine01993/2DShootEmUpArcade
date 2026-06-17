@@ -9,7 +9,6 @@ public class EnemyBullet : MonoBehaviour
 
 	public float speed = 5f;
 	public int damage = 10;
-	public GameObject OnHitSfx;
 	public GameObject OnHitVfx;
 
 	private void Start()
@@ -30,7 +29,7 @@ public class EnemyBullet : MonoBehaviour
 		{
 			var playerCtd = collision.gameObject.GetComponent<CanTakeDamage>();
 			playerCtd.TakeDamage(damage);
-			Instantiate(OnHitSfx);
+			MainController.Instance.soundManager.PlaySound("hitHurt");
 			CreateVfx(collision);
 			Destroy(gameObject);
 		}
@@ -38,7 +37,7 @@ public class EnemyBullet : MonoBehaviour
 		{
 			var shield = collision.gameObject.GetComponent<Shield>();
 			var remainingDamage = shield.TakeDamage(damage);
-			Instantiate(OnHitSfx);
+			MainController.Instance.soundManager.PlaySound("hitHurt");
 			CreateVfx(collision);
 			if (remainingDamage == 0)
 			{

@@ -13,7 +13,6 @@ public class Collectible : MonoBehaviour
 	public int maxBounceCount = 3;
 	public int bounceCount;
 	public Vector2 randomDirection;
-	public GameObject OnCollectSfx;
 
 	void Start()
 	{
@@ -71,7 +70,7 @@ public class Collectible : MonoBehaviour
 	public CollectibleType OnChildCollected()
 	{
 		Destroy(gameObject);
-		Instantiate(OnCollectSfx);
+		MainController.Instance.soundManager.PlaySound("collect");
 		return type;
 	}
 }

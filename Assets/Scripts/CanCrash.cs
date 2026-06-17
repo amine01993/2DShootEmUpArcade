@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CanTakeDamage))]
@@ -11,7 +10,6 @@ public class CanCrash : MonoBehaviour
 	private CanTakeDamage playerCtd;
 	private GameObject playerShieldGo;
 	private Shield shield;
-	public GameObject OnCrashSfx;
 	public GameObject OnCrashVfx;
 
 	public int crashDamage = 20;
@@ -60,7 +58,7 @@ public class CanCrash : MonoBehaviour
 					shield.TakeDamage(enemyCc.crashDamage);
 					enemyCtd.TakeDamage(crashDamage);
 					enemyCc.canCrash = false;
-					Instantiate(OnCrashSfx);
+					MainController.Instance.soundManager.PlaySound("crash");
 					CreateVfx(collision);
 				}
 			}
@@ -75,7 +73,7 @@ public class CanCrash : MonoBehaviour
 					shield.TakeDamage(meteorCc.crashDamage);
 					meteorCtd.TakeDamage(shieldCc.crashDamage);
 					meteorCc.canCrash = false;
-					Instantiate(OnCrashSfx);
+					MainController.Instance.soundManager.PlaySound("crash");
 					CreateVfx(collision);
 				}
 			}
@@ -91,7 +89,7 @@ public class CanCrash : MonoBehaviour
 					playerCtd.TakeDamage(enemyCc.crashDamage);
 					enemyCtd.TakeDamage(crashDamage);
 					enemyCc.canCrash = false;
-					Instantiate(OnCrashSfx);
+					MainController.Instance.soundManager.PlaySound("crash");
 					CreateVfx(collision);
 				}
 			}
@@ -104,7 +102,7 @@ public class CanCrash : MonoBehaviour
 					playerCtd.TakeDamage(meteorCc.crashDamage);
 					meteorCtd.TakeDamage(crashDamage);
 					meteorCc.canCrash = false;
-					Instantiate(OnCrashSfx);
+					MainController.Instance.soundManager.PlaySound("crash");
 					CreateVfx(collision);
 				}
 			}

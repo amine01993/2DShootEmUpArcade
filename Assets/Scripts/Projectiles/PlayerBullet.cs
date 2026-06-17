@@ -9,7 +9,6 @@ public class PlayerBullet : MonoBehaviour
 
     public float speed = 3f;
     public int damage = 25;
-	public GameObject OnHitSfx;
 	public GameObject OnHitVfx;
 
 	private void Start()
@@ -30,7 +29,7 @@ public class PlayerBullet : MonoBehaviour
 		{
 			var enemyCtd = collision.gameObject.GetComponent<CanTakeDamage>();
 			enemyCtd.TakeDamage(damage);
-			Instantiate(OnHitSfx);
+			MainController.Instance.soundManager.PlaySound("hitHurt");
 			CreateVfx(collision);
 			Destroy(gameObject);
 		}
@@ -38,7 +37,7 @@ public class PlayerBullet : MonoBehaviour
 		{
 			var meteorCtd = collision.gameObject.GetComponent<CanTakeDamage>();
 			meteorCtd.TakeDamage(damage);
-			Instantiate(OnHitSfx);
+			MainController.Instance.soundManager.PlaySound("hitHurt");
 			CreateVfx(collision);
 			Destroy(gameObject);
 		}

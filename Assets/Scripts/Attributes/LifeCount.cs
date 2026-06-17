@@ -1,13 +1,13 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeCount : MonoBehaviour
 {
 	public int maxLifes = 5;
 	public int remainingLifes = 5;
 	public TextMeshProUGUI lifeCountText;
-	public GameObject gameOverUi;
 
 	void Start()
 	{
@@ -18,8 +18,10 @@ public class LifeCount : MonoBehaviour
 	private void Update()
 	{
 		if(remainingLifes < 0) {
-			gameOverUi.SetActive(true);
-			Time.timeScale = 0;
+			var scoreScript = transform.parent.Find("Score").GetComponent<Score>();
+			MainController.Instance.uiManager.SetScores(scoreScript.score);
+			SceneManager.LoadScene("GameOver");
+			MainController.Instance.uiManager.ShowHighScore();
 		}
 	}
 

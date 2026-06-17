@@ -11,7 +11,6 @@ public class PlayerMissile : MonoBehaviour
 	public float speed = 2.75f;
 	public float rotationSpeed = 2.47f;
 	public int damage = 70;
-	public GameObject OnExplodeSfx;
 	public GameObject OnExplodeVfx;
 
 	private GameObject target = null;
@@ -47,32 +46,37 @@ public class PlayerMissile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.layer == enemyLayer)
+		Vector2 collisionPt = collision.ClosestPoint(new Vector2(transform.position.x, transform.position.y));
+		var combinedMask = (1 << enemyLayer) | (1 << obstacleLayer) | (1 << outerBoundLayer);
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(collisionPt, 1.2f, combinedMask);
+		foreach (var collider in colliders)
 		{
-			var enemyCtd = collision.gameObject.GetComponent<CanTakeDamage>();
-			enemyCtd.TakeDamage(damage);
-			Instantiate(OnExplodeSfx);
-			CreateVfx(collision);
-			Destroy(gameObject);
-		}
-		if (collision.gameObject.layer == obstacleLayer)
-		{
-			var meteorCtd = collision.gameObject.GetComponent<CanTakeDamage>();
-			meteorCtd.TakeDamage(damage);
-			Instantiate(OnExplodeSfx);
-			CreateVfx(collision);
-			Destroy(gameObject);
-		}
-		else if (collision.gameObject.layer == outerBoundLayer)
-		{
-			Destroy(gameObject);
+			if (collider.gameObject.layer == enemyLayer)
+			{
+				var enemyCtd = collider.gameObject.GetComponent<CanTakeDamage>();
+				enemyCtd.TakeDamage(damage);
+				MainController.Instance.soundManager.PlaySound("explosion");
+				CreateVfx(collider, collisionPt);
+				Destroy(gameObject);
+			}
+			if (collider.gameObject.layer == obstacleLayer)
+			{
+				var meteorCtd = collider.gameObject.GetComponent<CanTakeDamage>();
+				meteorCtd.TakeDamage(damage);
+				MainController.Instance.soundManager.PlaySound("explosion");
+				CreateVfx(collider, collisionPt);
+				Destroy(gameObject);
+			}
+			else if (collider.gameObject.layer == outerBoundLayer)
+			{
+				Destroy(gameObject);
+			}
 		}
 	}
 
-	void CreateVfx(Collider2D collision)
+	void CreateVfx(Collider2D collision, Vector2 point)
 	{
-		Vector2 collisionPt = collision.ClosestPoint(new Vector2(transform.position.x, transform.position.y));
-		Instantiate(OnExplodeVfx, collisionPt, transform.rotation);
+		Instantiate(OnExplodeVfx, point, transform.rotation);
 	}
 
 	private float GetLookAtTargetAngle(GameObject target)

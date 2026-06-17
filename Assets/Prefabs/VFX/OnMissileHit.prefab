@@ -752,7 +752,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.21
+      value: 1
       mode: 0
       spread: 0
       speed:
@@ -4907,3 +4907,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac35f315459155428a6068886be7c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vfx
+  r: 1.2

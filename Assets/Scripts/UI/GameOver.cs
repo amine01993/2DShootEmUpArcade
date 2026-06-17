@@ -34,9 +34,8 @@ public class GameOver : MonoBehaviour
 
 	private void RestartGame(ClickEvent evt)
 	{
-		//Time.timeScale = 1;
-		//gameObject.SetActive(false);
-		SceneManager.LoadScene(0);
+		MainController.Instance.uiManager.HideHighScore();
+		SceneManager.LoadScene("Game");
 	}
 
 	private void Exit(ClickEvent evt)

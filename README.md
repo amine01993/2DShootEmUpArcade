@@ -119,6 +119,12 @@ Animate the scaling of a gameObject
 https://discussions.unity.com/t/animate-the-scaling-of-a-gameobject/70235/5
 Used this article to animate the health bars
 
+## Assignment 1 GAME1017
+
+Fixing: Scene couldn't be loaded because it has not 
+https://www.youtube.com/shorts/ge3koyyH3nc
+how to use other scenes
+
 ===================================================
 ======= LICENSES
 ===================================================

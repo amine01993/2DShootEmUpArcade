@@ -42,6 +42,8 @@ public class PlayerShip : MonoBehaviour
 
 	void Update()
 	{
+		if (MainController.Instance.uiManager.IsPaused()) return;
+
 		Vector2 moveValue = moveAction.ReadValue<Vector2>();
 		Debug.DrawLine(transform.position, transform.position + new Vector3(moveValue.x, moveValue.y, 0f));
 

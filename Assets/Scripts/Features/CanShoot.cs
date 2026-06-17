@@ -13,7 +13,6 @@ public class CanShoot : MonoBehaviour
 
 	public float fireRate = 4f;
 	public bool startShooting = false;
-	public GameObject OnShootingSfx;
 
 	void Start()
 	{
@@ -27,12 +26,14 @@ public class CanShoot : MonoBehaviour
 
 	void Update()
 	{
+		if (MainController.Instance.uiManager.IsPaused()) return;
+
 		if (startShooting && fireRateTimeTracker.IsZero())
 		{
 			if (!IsPlayer || attackAction.phase == InputActionPhase.Performed)
 			{
 				OnShooting.Invoke();
-				Instantiate(OnShootingSfx);
+				MainController.Instance.soundManager.PlaySound("laserShoot");
 				fireRateTimeTracker.Update();
 			}
 		}

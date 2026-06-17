@@ -9905,7 +9905,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CanShoot
   fireRate: 4
   startShooting: 1
-  OnShootingSfx: {fileID: 1724178548180401653, guid: 7a205ede76d8a4049a50b95e1741c5da, type: 3}
 --- !u!114 &1337663307072554946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9963,9 +9962,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d28a77ae197ad459f9631da7d60f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanShoot
-  fireRate: 2
+  fireRate: 0.5
   startShooting: 1
-  OnShootingSfx: {fileID: 1724178548180401653, guid: e9b1076790af3484ab0138ab0420fe7d, type: 3}
 --- !u!114 &5378364769178760880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10002,6 +10000,7 @@ MonoBehaviour:
   maxHealthPoints: 100
   healthPoints: 100
   healthBarUi: {fileID: 0}
+  healthBarTransitionTime: 0.2
 --- !u!114 &2463596350768320106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10014,7 +10013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d36155a56213714eb5705c768b76adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanCrash
-  OnCrashSfx: {fileID: 1724178548180401653, guid: f27a9e4338f16e64fa6c4ef5772ef4fb, type: 3}
   OnCrashVfx: {fileID: 1027264591713693357, guid: 3c3003176d775e342aa3b853f2f4bd79, type: 3}
   crashDamage: 50
   collisionCooldown: 2
